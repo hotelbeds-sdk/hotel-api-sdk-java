@@ -48,6 +48,7 @@ import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "bookingRQ", namespace = "http://www.hotelbeds.com/schemas/messages")
@@ -63,7 +64,8 @@ public class BookingRQ extends AbstractGenericRequest {
     @Valid
     private Holder holder;
     @XmlElementWrapper(name = "rooms")
-    @XmlElement(name = "room")
+    @XmlElement(name = "rooms")
+    @JsonProperty("rooms")
     @NotNull
     @Size(min = 1, max = 2147483647, message = "{javax.validation.constraints.Size.message}")
     @Valid
