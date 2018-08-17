@@ -28,12 +28,14 @@ package com.hotelbeds.hotelapimodel.auto.model;
  */
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hotelbeds.hotelapimodel.auto.model.Tax;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 import lombok.ToString;
 import lombok.NoArgsConstructor;
@@ -45,7 +47,9 @@ import lombok.Data;
 @Data
 public class Taxes {
 
+    @XmlElementWrapper(name = "tax")
     @XmlElement(name = "tax")
+    @JsonProperty("tax")
     private List<Tax> taxes;
     @XmlAttribute
     private Boolean allIncluded;

@@ -40,18 +40,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hotelbeds.hotelapimodel.auto.convert.json.DateDeserializer;
-import com.hotelbeds.hotelapimodel.auto.convert.json.DateSerializer;
-import com.hotelbeds.hotelapimodel.auto.convert.json.RateSerializer;
-import com.hotelbeds.hotelapimodel.auto.model.CreditCard;
-import com.hotelbeds.hotelapimodel.auto.model.Keyword;
-import com.hotelbeds.hotelapimodel.auto.model.Review;
-import com.hotelbeds.hotelapimodel.auto.model.Room;
-import com.hotelbeds.hotelapimodel.auto.model.Supplier;
-import com.hotelbeds.hotelapimodel.auto.model.Upselling;
 import java.lang.Short;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -110,13 +99,16 @@ public class Hotel {
     @XmlAttribute
     private String giata;
     @XmlElementWrapper(name = "keywords")
-    @XmlElement(name = "keyword")
+    @XmlElement(name = "keywords")
+    @JsonProperty("keywords")
     private List<Keyword> keywords;
     @XmlElementWrapper(name = "reviews")
-    @XmlElement(name = "review")
+    @XmlElement(name = "reviews")
+    @JsonProperty("reviews")
     private List<Review> reviews;
     @XmlElementWrapper(name = "rooms")
-    @XmlElement(name = "room")
+    @XmlElement(name = "rooms")
+    @JsonProperty("rooms")
     private List<Room> rooms;
     @XmlAttribute
     @JsonSerialize(using = RateSerializer.class)
@@ -136,7 +128,8 @@ public class Hotel {
     @XmlAttribute
     private String currency;
     @XmlElementWrapper(name = "creditCards")
-    @XmlElement(name = "creditCard")
+    @XmlElement(name = "creditCards")
+    @JsonProperty("creditCards")
     private List<CreditCard> creditCards;
     @XmlElement
     private Supplier supplier;

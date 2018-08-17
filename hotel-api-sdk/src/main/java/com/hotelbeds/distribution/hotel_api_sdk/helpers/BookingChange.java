@@ -63,22 +63,22 @@ public class BookingChange {
         bookingChangeRQ.setMode(this.mode);
         bookingChangeRQ.setBookingId(this.bookingId);
         bookingChangeRQ.setBooking(this.booking);
-        if(this.clientReference != null){
+        if (this.clientReference != null) {
             bookingChangeRQ.getBooking().setClientReference(this.clientReference);
         }
-        if(this.holder != null){
+        if (this.holder != null) {
             bookingChangeRQ.getBooking().setHolder(this.holder);
         }
-        if(this.remark != null){
+        if (this.remark != null) {
             bookingChangeRQ.getBooking().setRemark(this.remark);
         }
-        if(this.checkin != null){
+        if (this.checkin != null) {
             bookingChangeRQ.getBooking().getHotel().setCheckIn(this.checkin);
         }
-        if(this.checkout != null){
+        if (this.checkout != null) {
             bookingChangeRQ.getBooking().getHotel().setCheckOut(this.checkout);
         }
-        if(this.rooms != null){
+        if (this.rooms != null) {
             bookingChangeRQ.getBooking().getHotel().setRooms(this.rooms);
         }
         return bookingChangeRQ;

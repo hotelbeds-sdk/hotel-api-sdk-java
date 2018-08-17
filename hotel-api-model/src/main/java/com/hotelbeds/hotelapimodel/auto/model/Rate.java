@@ -30,6 +30,7 @@ package com.hotelbeds.hotelapimodel.auto.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hotelbeds.hotelapimodel.auto.common.SimpleTypes.PaymentType;
 import com.hotelbeds.hotelapimodel.auto.convert.json.RateSerializer;
@@ -78,7 +79,8 @@ public class Rate extends BasicRate {
     @XmlAttribute
     private String boardName;
     @XmlElementWrapper(name = "cancellationPolicies")
-    @XmlElement(name = "cancellationPolicy")
+    @XmlElement(name = "cancellationPolicies")
+    @JsonProperty("cancellationPolicies")
     private List<CancellationPolicy> cancellationPolicies;
     @XmlElement(name = "taxes")
     private Taxes taxes;
@@ -106,7 +108,8 @@ public class Rate extends BasicRate {
     @JsonSerialize(using = RateSerializer.class)
     private BigDecimal rateup;
     @XmlElementWrapper(name = "dailyRates")
-    @XmlElement(name = "dailyRate")
+    @XmlElement(name = "dailyRates")
+    @JsonProperty("dailyRates")
     private List<DailyRate> dailyRates;
 
 
