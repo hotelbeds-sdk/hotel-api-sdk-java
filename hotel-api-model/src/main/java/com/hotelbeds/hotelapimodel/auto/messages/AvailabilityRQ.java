@@ -70,7 +70,8 @@ public class AvailabilityRQ extends AbstractGenericRequest {
     @Valid
     private Stay stay;
     @XmlElementWrapper(name = "occupancies")
-    @XmlElement(name = "occupancy")
+    @XmlElement(name = "occupancies")
+    @JsonProperty("occupancies")
     @Valid
     private List<Occupancy> occupancies;
     @XmlElement

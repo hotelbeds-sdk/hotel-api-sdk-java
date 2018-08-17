@@ -51,10 +51,13 @@ import javax.xml.bind.Unmarshaller;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hotelbeds.distribution.hotel_api_sdk.helpers.*;
 import com.hotelbeds.distribution.hotel_api_sdk.types.*;
 import com.hotelbeds.distribution.hotel_api_sdk.types.HotelbedsError;
 import com.hotelbeds.hotelapimodel.auto.messages.*;
+import com.hotelbeds.hotelcontentapi.auto.convert.json.DateSerializer;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -62,7 +65,6 @@ import com.hotelbeds.hotelapimodel.auto.common.SimpleTypes.BookingListFilterStat
 import com.hotelbeds.hotelapimodel.auto.common.SimpleTypes.BookingListFilterType;
 import com.hotelbeds.hotelapimodel.auto.util.AssignUtils;
 import com.hotelbeds.hotelapimodel.auto.util.ObjectJoiner;
-import com.hotelbeds.hotelcontentapi.auto.convert.json.DateSerializer;
 import com.hotelbeds.hotelcontentapi.auto.messages.AbstractGenericContentRequest;
 import com.hotelbeds.hotelcontentapi.auto.messages.AbstractGenericContentResponse;
 import com.hotelbeds.hotelcontentapi.auto.messages.Accommodation;
@@ -206,6 +208,8 @@ public class HotelApiClient implements AutoCloseable {
         initialised = true;
         executorService = Executors.newFixedThreadPool(8);
         mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.findAndRegisterModules();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
@@ -366,7 +370,7 @@ public class HotelApiClient implements AutoCloseable {
         final Map<String, String> params = new HashMap<>();
         params.put("bookingId", bookingId);
         addPropertiesAsParams(properties, params);
-        return (BookingChangeRS) callRemoteAPI(request,params, HotelApiPaths.BOOKING_CHANGE, reqType);
+        return (BookingChangeRS) callRemoteAPI(request, params, HotelApiPaths.BOOKING_CHANGE, reqType);
     }
 
     // TODO Fix so it does return an object of the proper type, else throw an error if failed
@@ -704,6 +708,10 @@ public class HotelApiClient implements AutoCloseable {
         return getStreamOf(language, useSecondaryLanguage, ContentType.HOTEL);
     }
 
+    public Stream<Hotel> hotelsStream(final String language, final boolean useSecondaryLanguage, String... fields) throws HotelApiSDKException {
+        return getStreamOf(language, useSecondaryLanguage, ContentType.HOTEL, fields);
+    }
+
     ////////////////
     // Gemeric Types
     ////////////////
@@ -881,6 +889,16 @@ public class HotelApiClient implements AutoCloseable {
         }
     }
 
+    private <T> Stream<T> getStreamOf(final String language, final boolean useSecondaryLanguage, ContentType type, String... fields)
+        throws HotelApiSDKException {
+        try {
+            return StreamSupport.stream(
+                new ContentElementSpliterator<T>(this, type, generateDefaultFullRequest(language, useSecondaryLanguage, type, fields)), false);
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new HotelApiSDKException(new HotelbedsError("SDK Configuration error", e.getCause().getMessage()));
+        }
+    }
+
     private AbstractGenericContentRequest generateDefaultFullRequest(final String language, final boolean useSecondaryLanguage, ContentType type)
         throws InstantiationException, IllegalAccessException {
         final AbstractGenericContentRequest abstractGenericContentRequest;
@@ -890,6 +908,13 @@ public class HotelApiClient implements AutoCloseable {
         abstractGenericContentRequest.setUseSecondaryLanguage(useSecondaryLanguage);
         abstractGenericContentRequest.setFields(new String[] {"all"});
         type.addCommonParameters(abstractGenericContentRequest, params);
+        return abstractGenericContentRequest;
+    }
+
+    private AbstractGenericContentRequest generateDefaultFullRequest(final String language, final boolean useSecondaryLanguage, ContentType type,
+        String... fields) throws InstantiationException, IllegalAccessException {
+        AbstractGenericContentRequest abstractGenericContentRequest = generateDefaultFullRequest(language, useSecondaryLanguage, type);
+        abstractGenericContentRequest.setFields(fields);
         return abstractGenericContentRequest;
     }
 
@@ -920,7 +945,7 @@ public class HotelApiClient implements AutoCloseable {
     }
 
     private GenericResponse callRemoteAPI(final AbstractGenericRequest request, HotelApiPaths path, RequestType requestType)
-            throws HotelApiSDKException {
+        throws HotelApiSDKException {
         return callRemoteAPI(request, null, path, requestType);
     }
 

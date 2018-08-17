@@ -30,6 +30,7 @@ package com.hotelbeds.hotelapimodel.auto.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hotelbeds.hotelapimodel.auto.common.SimpleTypes.ShoppingCartStatus;
 import com.hotelbeds.hotelapimodel.auto.model.Pax;
 import com.hotelbeds.hotelapimodel.auto.model.Rate;
@@ -63,11 +64,13 @@ public class Room {
     @XmlAttribute
     private String name;
     @XmlElementWrapper(name = "paxes")
-    @XmlElement(name = "pax")
+    @XmlElement(name = "paxes")
+    @JsonProperty("paxes")
     private List<Pax> paxes;
-    @XmlElementWrapper(name = "rates")
-    @XmlElement(name = "rate")
     @Valid
+    @XmlElementWrapper(name = "rates")
+    @XmlElement(name = "rates")
+    @JsonProperty("rates")
     private List<Rate> rates;
     @XmlElement
     private String filterDebug;

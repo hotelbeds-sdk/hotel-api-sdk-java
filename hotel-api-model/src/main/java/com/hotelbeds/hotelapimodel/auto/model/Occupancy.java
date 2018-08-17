@@ -30,6 +30,7 @@ package com.hotelbeds.hotelapimodel.auto.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hotelbeds.hotelapimodel.auto.model.Pax;
 import java.util.List;
 import javax.validation.Valid;
@@ -65,8 +66,9 @@ public class Occupancy {
     @Min(value = 0)
     private Integer children;
     @XmlElementWrapper(name = "paxes")
-    @XmlElement(name = "pax")
+    @XmlElement(name = "paxes")
     @Valid
+    @JsonProperty("paxes")
     private List<Pax> paxes;
 
 

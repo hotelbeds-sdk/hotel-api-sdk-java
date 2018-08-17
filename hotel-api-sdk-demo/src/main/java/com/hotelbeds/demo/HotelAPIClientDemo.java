@@ -243,19 +243,15 @@ public class HotelAPIClientDemo {
                                 rooms.get(0).getPaxes().get(0).setSurname("NewPaxSurname");
                                 rooms.get(0).getPaxes().get(0).setName("NewPaxName");
                                 BookingChange bookingChangeBuilder =
-                                        BookingChange.builder().fromBookingRS()
-                                                .booking(bookingRS.getBooking())
-                                                .mode(SimpleTypes.ChangeMode.UPDATE)
-                                                .bookingId(bookingRS.getBooking().getReference())
-                                                .clientReference("NewClientReference")
-                                                .holder(holder)
-                                                .remark("NewRemark")
-                                                //.checkin(LocalDate.now().plusDays(60))
-                                                //.checkout(LocalDate.now().plusDays(62))
-                                                .rooms(rooms)
-                                                .build();
+                                    BookingChange.builder().fromBookingRS().booking(bookingRS.getBooking()).mode(SimpleTypes.ChangeMode.UPDATE)
+                                        .bookingId(bookingRS.getBooking().getReference()).clientReference("NewClientReference").holder(holder)
+                                        .remark("NewRemark")
+                                        //.checkin(LocalDate.now().plusDays(60))
+                                        //.checkout(LocalDate.now().plusDays(62))
+                                        .rooms(rooms).build();
                                 //log.debug("bookingChangeBuilder: {}", LoggingRequestInterceptor.write(bookingChangeBuilder, RequestType.JSON));
-                                BookingChangeRS bookingChangeRS = apiClient.change(bookingRS.getBooking().getReference(),  bookingChangeBuilder.toBookingRQ(), RequestType.JSON);
+                                BookingChangeRS bookingChangeRS =
+                                    apiClient.change(bookingRS.getBooking().getReference(), bookingChangeBuilder.toBookingRQ(), RequestType.JSON);
                                 log.debug("BookingChangeRS: {}", LoggingRequestInterceptor.write(bookingChangeRS, RequestType.JSON));
                             } else {
                                 log.info("BookingChange failed");

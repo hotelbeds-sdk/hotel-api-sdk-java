@@ -28,13 +28,13 @@ package com.hotelbeds.hotelcontentapi.auto.messages;
  */
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.hotelbeds.hotelcontentapi.auto.convert.json.DateSerializer;
 import com.hotelbeds.hotelcontentapi.auto.convert.json.TimeSerializer;
-import com.hotelbeds.hotelcontentapi.auto.messages.Content;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -62,10 +62,10 @@ public class HotelFacility {
     private Integer ageFrom;
     private Integer ageTo;
     @JsonProperty
-    @JsonSerialize(using = DateSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateFrom;
     @JsonProperty
-    @JsonSerialize(using = DateSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateTo;
     @JsonProperty
     @JsonSerialize(using = TimeSerializer.class)

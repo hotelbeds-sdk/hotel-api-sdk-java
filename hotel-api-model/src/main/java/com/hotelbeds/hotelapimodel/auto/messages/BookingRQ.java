@@ -30,6 +30,7 @@ package com.hotelbeds.hotelapimodel.auto.messages;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hotelbeds.hotelapimodel.auto.model.BookingRoom;
 import com.hotelbeds.hotelapimodel.auto.model.Holder;
 import com.hotelbeds.hotelapimodel.auto.model.PaymentData;
@@ -63,7 +64,8 @@ public class BookingRQ extends AbstractGenericRequest {
     @Valid
     private Holder holder;
     @XmlElementWrapper(name = "rooms")
-    @XmlElement(name = "room")
+    @XmlElement(name = "rooms")
+    @JsonProperty("rooms")
     @NotNull
     @Size(min = 1, max = 2147483647, message = "{javax.validation.constraints.Size.message}")
     @Valid
