@@ -4,7 +4,7 @@
   <groupId>com.hotelbeds</groupId>
   <artifactId>hotel-api-sdk-java</artifactId>
   <packaging>pom</packaging>
-  <version>0.14</version>
+  <version>0.15-SNAPSHOT</version>
   <name>hotel-api-sdk</name>
   <url>https://github.com/hotelbeds-sdk/hotel-api-sdk-java</url>
   <licenses>
@@ -23,7 +23,7 @@
     <url>https://github.com/hotelbeds-sdk/hotel-api-sdk-java</url>
     <connection>scm:git:git://github.com/hotelbeds-sdk/hotel-api-sdk-java.git</connection>
     <developerConnection>scm:git:https://github.com/hotelbeds-sdk/hotel-api-sdk-java.git</developerConnection>
-    <tag>hotel-api-sdk-java-0.14</tag>
+    <tag>hotel-api-sdk-java-0.15</tag>
   </scm>
   <organization>
     <name>HOTELBEDS, S.L.U.</name>
