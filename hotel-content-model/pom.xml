@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.hotelbeds</groupId>
     <artifactId>hotel-api-sdk-java</artifactId>
-    <version>0.15-SNAPSHOT</version>
+    <version>0.15</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.hotelbeds.hotel-api-sdk-java</groupId>
