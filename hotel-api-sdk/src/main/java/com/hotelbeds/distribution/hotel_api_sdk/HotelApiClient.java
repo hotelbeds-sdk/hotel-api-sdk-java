@@ -366,7 +366,7 @@ public class HotelApiClient implements AutoCloseable {
         final Map<String, String> params = new HashMap<>();
         params.put("bookingId", bookingId);
         addPropertiesAsParams(properties, params);
-        return (BookingChangeRS) callRemoteAPI(request,params, HotelApiPaths.BOOKING_CHANGE, reqType);
+        return (BookingChangeRS) callRemoteAPI(request, params, HotelApiPaths.BOOKING_CHANGE, reqType);
     }
 
     // TODO Fix so it does return an object of the proper type, else throw an error if failed
@@ -920,7 +920,7 @@ public class HotelApiClient implements AutoCloseable {
     }
 
     private GenericResponse callRemoteAPI(final AbstractGenericRequest request, HotelApiPaths path, RequestType requestType)
-            throws HotelApiSDKException {
+        throws HotelApiSDKException {
         return callRemoteAPI(request, null, path, requestType);
     }
 
@@ -1018,6 +1018,10 @@ public class HotelApiClient implements AutoCloseable {
                     } else {
                         throw new HotelApiSDKException(new HotelbedsError("Invalid response", "Wrong content type"
                             + response.headers().get(CONTENT_TYPE_HEADER)));
+                    }
+                } finally {
+                    if (response != null) {
+                        response.close();
                     }
                 }
             } catch (HotelApiSDKException e) {
