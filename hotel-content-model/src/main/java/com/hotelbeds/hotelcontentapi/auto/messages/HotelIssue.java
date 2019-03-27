@@ -31,8 +31,10 @@ package com.hotelbeds.hotelcontentapi.auto.messages;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hotelbeds.hotelcontentapi.auto.convert.json.DateSerializer;
+import com.hotelbeds.hotelcontentapi.auto.convert.json.DateDeserializer;
 import com.hotelbeds.hotelcontentapi.auto.messages.Content;
 import java.time.LocalDate;
 
@@ -51,9 +53,11 @@ public class HotelIssue {
     private Content description;
     @JsonProperty
     @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializer.class)
     private LocalDate dateFrom;
     @JsonProperty
     @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializer.class)
     private LocalDate dateTo;
     private Integer order;
     private Boolean alternative;
