@@ -1,0 +1,17 @@
+com.hotelbeds.demo
+com.hotelbeds.demo.simple
+com.hotelbeds.distribution.hotel_api_sdk
+com.hotelbeds.distribution.hotel_api_sdk.helpers
+com.hotelbeds.distribution.hotel_api_sdk.integration
+com.hotelbeds.distribution.hotel_api_sdk.types
+com.hotelbeds.distribution.hotel_api_sdk.unit.common
+com.hotelbeds.hotelapimodel.auto.common
+com.hotelbeds.hotelapimodel.auto.convert.json
+com.hotelbeds.hotelapimodel.auto.convert.xml
+com.hotelbeds.hotelapimodel.auto.messages
+com.hotelbeds.hotelapimodel.auto.model
+com.hotelbeds.hotelapimodel.auto.util
+com.hotelbeds.hotelapimodel.util
+com.hotelbeds.hotelcontentapi.auto.convert.json
+com.hotelbeds.hotelcontentapi.auto.messages
+com.hotelbeds.hotelcontentapi.util
