@@ -7,5 +7,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.hotelbeds.hotel-api-sdk-java</groupId>
   <artifactId>build-tools</artifactId>
-  <name>Build tools</name>
+  <name>hotelbeds-build-tools</name>
+  <build>
+    <finalName>${project.name}</finalName>
+  </build>
 </project>

@@ -28,11 +28,12 @@ package com.hotelbeds.hotelcontentapi.auto.messages;
  */
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.hotelbeds.hotelcontentapi.auto.convert.json.DateSerializer;
+
 import java.time.LocalDate;
 
 import lombok.ToString;
@@ -46,10 +47,9 @@ import lombok.Data;
 public class RateComment {
 
     @JsonProperty
-    @JsonSerialize(using = DateSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateEnd;
     @JsonProperty
-    @JsonSerialize(using = DateSerializer.class)
     private LocalDate dateStart;
     private String description;
 

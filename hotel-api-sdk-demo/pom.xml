@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.hotelbeds.hotel-api-sdk-java</groupId>
   <artifactId>hotelapi-sdk-demo</artifactId>
-  <name>HotelAPI SDK Demo</name>
+  <name>hotelbeds-api-sdk-demo</name>
   <properties>
     <java-version>1.8</java-version>
   </properties>
@@ -50,6 +50,7 @@
   </dependencies>
   <!-- It is duplicated so you can easily replicate this project without having to duplicate the whole structure -->
   <build>
+    <finalName>${project.name}</finalName>
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

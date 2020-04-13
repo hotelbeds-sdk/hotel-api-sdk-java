@@ -46,6 +46,7 @@ import com.hotelbeds.hotelcontentapi.auto.messages.RateComments;
 import com.hotelbeds.hotelcontentapi.auto.messages.Room;
 import com.hotelbeds.hotelcontentapi.auto.messages.Segment;
 import com.hotelbeds.hotelcontentapi.auto.messages.Terminal;
+import java.util.Arrays;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,7 +66,7 @@ public class HotelContentSample {
             }
             log.info("Hotels Done!!");
 
-            Hotel hotel = apiClient.getHotel(1234, "ENG", false);
+            Hotel hotel = apiClient.getHotels(Arrays.asList(1234), "ENG", false).get(0);
             log.debug("hotel: {}", hotel);
             log.info("Hotel Done!!");
 

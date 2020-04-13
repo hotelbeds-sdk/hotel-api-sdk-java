@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.hotelbeds.hotel-api-sdk-java</groupId>
   <artifactId>hotel-api-sdk</artifactId>
-  <name>HotelAPI SDK</name>
+  <name>hotelbeds-api-sdk</name>
   <dependencies>
     <dependency>
       <groupId>com.hotelbeds.hotel-api-sdk-java</groupId>
@@ -79,6 +79,7 @@
     </dependency>
   </dependencies>
   <build>
+      <finalName>${project.name}</finalName>
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

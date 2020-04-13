@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+  <info organisation="com.eysys" module="hotelbeds-api-model" />
+  <configurations />
+  <publications>
+ <artifact name="hotelbeds-api-model" type="jar"/>
+  </publications> 
+  <dependencies />
+</ivy-module>

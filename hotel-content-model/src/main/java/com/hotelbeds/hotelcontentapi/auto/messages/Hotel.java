@@ -37,6 +37,7 @@ import com.hotelbeds.hotelcontentapi.auto.messages.Category;
 import com.hotelbeds.hotelcontentapi.auto.messages.Chain;
 import com.hotelbeds.hotelcontentapi.auto.messages.Content;
 import com.hotelbeds.hotelcontentapi.auto.messages.Country;
+import com.hotelbeds.hotelcontentapi.auto.messages.State;
 import com.hotelbeds.hotelcontentapi.auto.messages.Destination;
 import com.hotelbeds.hotelcontentapi.auto.messages.GeoLocation;
 import com.hotelbeds.hotelcontentapi.auto.messages.GroupCategory;
@@ -68,6 +69,7 @@ public class Hotel {
     private Content description;
     private String countryCode;
     private Country country;
+    private State state;
     private String destinationCode;
     private Short zoneCode;
     private Destination destination;

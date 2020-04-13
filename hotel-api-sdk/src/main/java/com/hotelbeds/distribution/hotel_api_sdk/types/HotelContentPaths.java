@@ -47,7 +47,7 @@ public enum HotelContentPaths {
         "lastUpdateTime")),
     TYPES_URL(ConstantHolder.BASIC_TYPE_PATH, AbstractGenericContentResponse.class, Arrays.asList("from", "to", "lastUpdateTime")),
     RATECOMMENT_DETAIL_URL(ConstantHolder.BASIC_TYPE_PATH, RateCommentDetailsRS.class, Arrays.asList("date", "code")),
-    HOTEL_DETAIL_URL(ConstantHolder.BASIC_HOTEL_PATH, HotelDetailsRS.class),
+    HOTEL_DETAIL_URL(ConstantHolder.BASIC_HOTELDETAILS_PATH, HotelDetailsRS.class),
     HOTELS_URL(ConstantHolder.HOTELS_PATH, HotelsRS.class, Arrays.asList("countryCode", "destinationCode", "codes", "from", "to", "lastUpdateTime"));
 
     private final String urlTemplate;
@@ -97,6 +97,7 @@ public enum HotelContentPaths {
         private final static String PAGINATION_PARAMETERS = "&from=${from}&to=${to}&lastUpdateTime=${lastUpdateTime}";
         private final static String BASIC_TYPE_PATH = BASIC_PATH + "types/${type}";
         private final static String BASIC_HOTEL_PATH = BASIC_PATH + "${type}/${code}";
+        private final static String BASIC_HOTELDETAILS_PATH = BASIC_PATH + "${type}/${code}/details";
         private final static String BASIC_LOCATION_PATH = BASIC_PATH + "locations/${type}";
         private final static String HOTELS_PATH = BASIC_PATH + "${type}";
     }

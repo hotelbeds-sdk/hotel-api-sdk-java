@@ -955,7 +955,8 @@ public final class SimpleTypes {
      */
     public enum TaxType {
         TAX("T"),
-        FEE("F");
+        FEE("F"),
+        TAXESANDFEES("TF");
         private String internalCode;
 
         TaxType(String internalCode) {
@@ -983,6 +984,8 @@ public final class SimpleTypes {
                 result = TAX;
             } else if (FEE.getInternalCode().equals(internalCode)) {
                 result = FEE;
+            } else if (TAXESANDFEES.getInternalCode().equals(internalCode)) {
+                result = TAXESANDFEES;
             } else {
                 log.debug("TaxType not found with this internalCode: " + internalCode);
             }
