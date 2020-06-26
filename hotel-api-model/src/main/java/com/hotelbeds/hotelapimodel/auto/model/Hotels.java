@@ -31,7 +31,9 @@ package com.hotelbeds.hotelapimodel.auto.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.hotelbeds.hotelapimodel.auto.convert.json.DateDeserializer;
 import com.hotelbeds.hotelapimodel.auto.convert.json.DateSerializer;
 import com.hotelbeds.hotelapimodel.auto.model.Hotel;
 import java.time.LocalDate;
@@ -59,6 +61,7 @@ public class Hotels {
     @XmlAttribute
     @JsonProperty
     @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializer.class)
     private LocalDate checkIn;
     @XmlAttribute
     @JsonProperty
@@ -66,6 +69,7 @@ public class Hotels {
     @XmlAttribute
     @JsonProperty
     @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializer.class)
     private LocalDate checkOut;
 
 

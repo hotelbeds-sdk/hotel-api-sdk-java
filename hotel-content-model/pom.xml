@@ -9,15 +9,16 @@
   <groupId>com.hotelbeds.hotel-api-sdk-java</groupId>
   <artifactId>hotel-content-model</artifactId>
   <name>Hotel Content Model</name>
-  <packaging>jar</packaging>
+  <packaging>bundle</packaging>
   <description>Hotel Content Data model</description>
   <dependencies>
+      <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
+          <version>3.4</version>
+      </dependency>
     <!-- 
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.4</version>
-    </dependency>
+
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
@@ -82,6 +83,17 @@
       <plugin>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>4.1.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <_include>-osgi.bnd</_include>
+          </instructions>
+        </configuration>
       </plugin>
     </plugins>
   </build>

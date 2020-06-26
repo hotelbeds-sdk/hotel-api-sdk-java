@@ -23,10 +23,7 @@ package com.hotelbeds.distribution.hotel_api_sdk.helpers;
  */
 
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.concurrent.TimeUnit;
@@ -39,14 +36,19 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import com.hotelbeds.distribution.hotel_api_sdk.types.HotelApiSDKException;
 import com.hotelbeds.distribution.hotel_api_sdk.types.HotelbedsError;
 import com.hotelbeds.distribution.hotel_api_sdk.types.RequestType;
 import com.hotelbeds.hotelapimodel.auto.messages.GenericResponse;
 
-import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
+//import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+//import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 import org.jooq.lambda.Unchecked;
 
@@ -188,11 +190,7 @@ public final class LoggingRequestInterceptor implements Interceptor {
             } else if (body != "" && bodyContentType != null && bodyContentType.toLowerCase().startsWith(HotelApiClient.APPLICATION_XML_HEADER)) {
                 try {
                     log.trace("  XML Body: {}", prettyPrint(body, true, 2));
-                } catch (IOException e) {
-                    log.error("  Body: Could not be prettyfied {}", e.getMessage());
-                } catch (SAXException e) {
-                    log.error("  Body: Could not be prettyfied {}", e.getMessage());
-                } catch (ParserConfigurationException e) {
+                } catch (Exception e) {
                     log.error("  Body: Could not be prettyfied {}", e.getMessage());
                 }
             } else {
@@ -211,21 +209,29 @@ public final class LoggingRequestInterceptor implements Interceptor {
     }
 
     private static String prettyPrint(String xml, Boolean ommitXmlDeclaration, Integer indent) throws IOException, SAXException,
-        ParserConfigurationException {
+        ParserConfigurationException, TransformerException {
 
         DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = db.parse(new InputSource(new StringReader(xml)));
 
-        OutputFormat format = new OutputFormat(doc);
-        format.setIndenting(true);
-        format.setIndent(indent);
-        format.setOmitXMLDeclaration(ommitXmlDeclaration);
-        format.setLineWidth(Integer.MAX_VALUE);
-        Writer outxml = new StringWriter();
-        XMLSerializer serializer = new XMLSerializer(outxml, format);
-        serializer.serialize(doc);
+        //TODO improve this
+        DOMSource domSource = new DOMSource(doc);
+        StringWriter writer = new StringWriter();
+        StreamResult result = new StreamResult(writer);
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer transformer = tf.newTransformer();
+        transformer.transform(domSource, result);
+        return writer.toString();
 
-        return outxml.toString();
+        //        OutputFormat format = new OutputFormat(doc);
+        //        format.setIndenting(true);
+        //        format.setIndent(indent);
+        //        format.setOmitXMLDeclaration(ommitXmlDeclaration);
+        //        format.setLineWidth(Integer.MAX_VALUE);
+        //        Writer outxml = new StringWriter();
+        //        XMLSerializer serializer = new XMLSerializer(outxml, format);
+        //        serializer.serialize(doc);
+        //        return outxml.toString();
     }
 
     public static String writeJSON(final Object object) {

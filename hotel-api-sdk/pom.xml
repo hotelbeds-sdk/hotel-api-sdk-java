@@ -8,6 +8,7 @@
   <groupId>com.hotelbeds.hotel-api-sdk-java</groupId>
   <artifactId>hotel-api-sdk</artifactId>
   <name>HotelAPI SDK</name>
+  <packaging>bundle</packaging>
   <dependencies>
     <dependency>
       <groupId>com.hotelbeds.hotel-api-sdk-java</groupId>
@@ -110,6 +111,17 @@
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
           </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>4.1.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <_include>-osgi.bnd</_include>
+          </instructions>
         </configuration>
       </plugin>
     </plugins>

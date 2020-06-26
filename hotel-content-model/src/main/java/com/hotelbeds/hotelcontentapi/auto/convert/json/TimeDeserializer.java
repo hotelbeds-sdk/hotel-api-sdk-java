@@ -3,13 +3,13 @@
  * Do not edit. Any modification on this file will be removed automatically after project build
  *
  */
-package com.hotelbeds.hotelapimodel.auto.convert.json;
+package com.hotelbeds.hotelcontentapi.auto.convert.json;
 
 /*
  * #%L
  * HotelAPI Model
  * %%
- * Copyright (C) 2015 - 2018 HOTELBEDS GROUP, S.L.U.
+ * Copyright (C) 2015 - 2018 HOTELBEDS TECHNOLOGY, S.L.U.
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -28,23 +28,31 @@ package com.hotelbeds.hotelapimodel.auto.convert.json;
  */
 
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.node.TextNode;
+import com.hotelbeds.hotelcontentapi.util.AssignUtils;
+
 import java.io.IOException;
 import java.time.LocalDate;
-
-import com.hotelbeds.hotelapimodel.auto.util.AssignUtils;
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
- * The Class DateSerializer.
+ *
+ * Created by joroldan
  */
-public class DateSerializer extends JsonSerializer<LocalDate> {
+public class TimeDeserializer extends JsonDeserializer<LocalTime> {
+
+    public static final DateTimeFormatter REST_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     @Override
-    public void serialize(final LocalDate date, final JsonGenerator generator, final SerializerProvider provider) throws IOException {
-        final String dateString = date.format(AssignUtils.REST_FORMATTER);
-        generator.writeString(dateString);
+    public LocalTime deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+        ObjectCodec oc = jp.getCodec();
+        TextNode node = oc.readTree(jp);
+        String timeString = node.textValue();
+        return LocalTime.parse(timeString, REST_FORMATTER);
     }
 }

@@ -31,8 +31,11 @@ package com.hotelbeds.hotelcontentapi.auto.messages;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.hotelbeds.hotelcontentapi.auto.convert.json.DateDeserializer;
 import com.hotelbeds.hotelcontentapi.auto.convert.json.DateSerializer;
+import com.hotelbeds.hotelcontentapi.auto.convert.json.TimeDeserializer;
 import com.hotelbeds.hotelcontentapi.auto.convert.json.TimeSerializer;
 import com.hotelbeds.hotelcontentapi.auto.messages.Content;
 import java.math.BigDecimal;
@@ -63,15 +66,19 @@ public class HotelFacility {
     private Integer ageTo;
     @JsonProperty
     @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializer.class)
     private LocalDate dateFrom;
     @JsonProperty
     @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializer.class)
     private LocalDate dateTo;
     @JsonProperty
     @JsonSerialize(using = TimeSerializer.class)
+    @JsonDeserialize(using = TimeDeserializer.class)
     private LocalTime timeFrom;
     @JsonProperty
     @JsonSerialize(using = TimeSerializer.class)
+    @JsonDeserialize(using = TimeDeserializer.class)
     private LocalTime timeTo;
     private BigDecimal amount;
     private String currency;
